@@ -10,13 +10,25 @@ input {
   width: 300px;
   margin-right: 1rem;
 }
+.input-buscador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 button {
   padding: 0.5rem 1rem;
   font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.buscador {
+  margin-top: 2rem;
+  text-align: center;
 }
 
 .resultado {
+  margin-right: 2rem;
   margin-top: 2rem;
   text-align: left;
   display: inline-block;

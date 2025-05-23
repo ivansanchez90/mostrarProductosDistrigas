@@ -12,9 +12,9 @@ const EXCEL_PATH = path.join(__dirname, 'example.xlsx');
 
 // Datos de ejemplo
 const productos = [
-  { Código: '1234567890123', Nombre: 'Lámpara LED', Descripción: 'Lámpara 15W blanca', Precio: 10.99 },
-  { Código: '9876543210987', Nombre: 'Teclado Gamer', Descripción: 'Mecánico RGB', Precio: 49.99 },
-  { Código: '5558883331112', Nombre: 'Auriculares', Descripción: 'Bluetooth inalámbricos', Precio: 25.50 },
+  { Código: '11622/2', Nombre: 'ANAFE INDUSTRIAL FOCO 2 HLLAS 20000 CAL/H CAÑO ROJO', Descripción: 'DESCRIPCION ANAFE INDUSTRIAL FOCO 2 HLLAS 20000 CAL/H CAÑO ROJO', Precio: 7938.016429 },
+  { Código: '986297', Nombre: 'DISPENSER USUHAIA FRIO CALOR BIDON', Descripción: 'DESCRIPCION DISPENSER USUHAIA FRIO CALOR BIDON', Precio: 331528.925674 },
+  { Código: '885794', Nombre: 'DISPENSER LH V53 DE PIE PARA BIDON', Descripción: 'DESCRIPCION DISPENSER LH V53 DE PIE PARA BIDON', Precio: 284367.7684911 },
 ];
 
 // 🧾 Función que genera el Excel
