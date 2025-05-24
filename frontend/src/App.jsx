@@ -30,8 +30,6 @@ function App() {
         .replace(/[^0-9.]/g, '')
       prod.precioventa = parseFloat(cleaned)
 
-      console.log(`Producto convertido: ${JSON.stringify(prod)}`)
-
       setProducto(prod)
       setError(null)
     } catch (err) {
