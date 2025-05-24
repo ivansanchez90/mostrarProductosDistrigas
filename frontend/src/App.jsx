@@ -19,7 +19,20 @@ function App() {
       const res = await axios.get(
         `http://localhost:3001/producto/${codigoCodificado}`
       )
-      setProducto(res.data)
+      // 1) Clonamos el objeto
+      const prod = { ...res.data }
+
+      // 2) Convertimos el precio (string) a number
+      //    Si viene con coma decimal, normalizamos:
+      const rawPrice = prod.precioventa
+      const cleaned = String(rawPrice)
+        .replace(/,/g, '.')
+        .replace(/[^0-9.]/g, '')
+      prod.precioventa = parseFloat(cleaned)
+
+      console.log(`Producto convertido: ${JSON.stringify(prod)}`)
+
+      setProducto(prod)
       setError(null)
     } catch (err) {
       setProducto(null)
@@ -59,34 +72,30 @@ function App() {
           <div className='resultado'>
             <h2>Producto encontrado:</h2>
             <p>
-              <strong className='underline'>Nombre:</strong> {producto.Nombre}
-            </p>
-            <p>
-              <strong className='underline'>Descripción:</strong>{' '}
-              {producto.Descripción}
+              <strong className='underline'>Nombre:</strong> {producto.nombre}
             </p>
             <p>
               <strong className='underline'>Precio Lista:</strong>{' '}
-              {formatCurrency(producto.Precio)}
+              {formatCurrency(producto.precioventa)}
             </p>
             <p className='metodos-pago resaltar'>
               <img src='/visa.svg' alt='visa' />
               <img src='/mastercard.svg' alt='mastercard' />
               <div style={{ marginRight: '5px' }}>6 cuotas sin interés de:</div>
-              {formatCurrency((producto.Precio * 1.15) / 6)}
+              {formatCurrency((producto.precioventa * 1.15) / 6)}
             </p>
             <p className='metodos-pago'>
               <img src='/visa.svg' alt='visa' />
               <img src='/mastercard.svg' alt='mastercard' />
               <img src='/tuya.jpg' alt='tuya' />
               <strong>3 cuotas sin interés de:</strong>
-              {formatCurrency((producto.Precio * 1.15) / 3)}
+              {formatCurrency((producto.precioventa * 1.15) / 3)}
             </p>
 
             <p className='metodos-pago'>
               <img src='/efectivo.png' alt='efectivo' />
               <strong>10% de descuento:</strong>
-              {formatCurrency(producto.Precio * 0.9)}
+              {formatCurrency(producto.precioventa * 0.9)}
             </p>
           </div>
         )}
