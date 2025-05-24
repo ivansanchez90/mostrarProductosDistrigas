@@ -11,13 +11,20 @@ function App() {
   const buscarProducto = async () => {
     if (!codigo) return
 
+    // Codificar el código para la URL (importante para las barras)
+    const codigoCodificado = encodeURIComponent(codigo)
+    console.log(`Buscando código: ${codigo} (codificado: ${codigoCodificado})`)
+
     try {
-      const res = await axios.get(`http://localhost:3001/producto/${codigo}`)
+      const res = await axios.get(
+        `http://localhost:3001/producto/${codigoCodificado}`
+      )
       setProducto(res.data)
       setError(null)
     } catch (err) {
       setProducto(null)
       setError('Producto no encontrado')
+      console.error('Error en la búsqueda:', err.response?.data || err.message)
     }
   }
 
@@ -52,18 +59,20 @@ function App() {
           <div className='resultado'>
             <h2>Producto encontrado:</h2>
             <p>
-              <strong>Nombre:</strong> {producto.Nombre}
+              <strong className='underline'>Nombre:</strong> {producto.Nombre}
             </p>
             <p>
-              <strong>Descripción:</strong> {producto.Descripción}
+              <strong className='underline'>Descripción:</strong>{' '}
+              {producto.Descripción}
             </p>
             <p>
-              <strong>Precio Lista:</strong> {formatCurrency(producto.Precio)}
+              <strong className='underline'>Precio Lista:</strong>{' '}
+              {formatCurrency(producto.Precio)}
             </p>
-            <p className='metodos-pago'>
+            <p className='metodos-pago resaltar'>
               <img src='/visa.svg' alt='visa' />
               <img src='/mastercard.svg' alt='mastercard' />
-              <strong>6 cuotas sin interés de: </strong>
+              <div style={{ marginRight: '5px' }}>6 cuotas sin interés de:</div>
               {formatCurrency((producto.Precio * 1.15) / 6)}
             </p>
             <p className='metodos-pago'>

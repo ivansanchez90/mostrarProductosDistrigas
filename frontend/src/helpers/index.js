@@ -7,4 +7,5 @@ export function formatCurrency(amount) {
   })
     .format(amount)
     .replace(/,/g, '.')
+    .replace(/\$/, '$ ')
 }
