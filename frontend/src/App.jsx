@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
+import { formatCurrency } from './helpers'
 
 function App() {
   const [codigo, setCodigo] = useState('')
@@ -57,21 +58,26 @@ function App() {
               <strong>Descripción:</strong> {producto.Descripción}
             </p>
             <p>
-              <strong>Precio Lista:</strong> ${producto.Precio.toFixed(2)}
+              <strong>Precio Lista:</strong> {formatCurrency(producto.Precio)}
             </p>
-            <p>
-              <strong>
-                3 y 6 cuotas sin interés con Visa y Mastercard bancarizada
-              </strong>{' '}
-              ${(producto.Precio * 1.15).toFixed(2)}
+            <p className='metodos-pago'>
+              <img src='/visa.svg' alt='visa' />
+              <img src='/mastercard.svg' alt='mastercard' />
+              <strong>6 cuotas sin interés de: </strong>
+              {formatCurrency((producto.Precio * 1.15) / 6)}
             </p>
-            <p>
-              <strong>3 cuotas sin interés con Tuya</strong> $
-              {(producto.Precio * 1.15).toFixed(2)}
+            <p className='metodos-pago'>
+              <img src='/visa.svg' alt='visa' />
+              <img src='/mastercard.svg' alt='mastercard' />
+              <img src='/tuya.jpg' alt='tuya' />
+              <strong>3 cuotas sin interés de:</strong>
+              {formatCurrency((producto.Precio * 1.15) / 3)}
             </p>
-            <p>
-              <strong>Efectivo, Transferencia 10% de descuento:</strong> $
-              {(producto.Precio * 0.9).toFixed(2)}
+
+            <p className='metodos-pago'>
+              <img src='/efectivo.png' alt='efectivo' />
+              <strong>10% de descuento:</strong>
+              {formatCurrency(producto.Precio * 0.9)}
             </p>
           </div>
         )}
