@@ -76,7 +76,7 @@ function App() {
             </p>
             <p>
               <strong className='underline'>Precio Lista:</strong>{' '}
-              {formatCurrency(producto.precioventa)}
+              {formatCurrency(producto.precioventa * 1.15)}
             </p>
             <p className='metodos-pago resaltar'>
               <img src='/visa.svg' alt='visa' />
@@ -94,8 +94,8 @@ function App() {
 
             <p className='metodos-pago'>
               <img src='/efectivo.png' alt='efectivo' />
-              <strong>10% de descuento:</strong>
-              {formatCurrency(producto.precioventa * 0.9)}
+              <strong>Efectivo, Transferencia 15% dcto:</strong>
+              {formatCurrency(producto.precioventa)}
             </p>
           </div>
         )}
