@@ -43,12 +43,13 @@ app.get('/producto/:codigo', (req, res) => {
             .trim()
             .toLowerCase() === codigoBuscado
       )
+
       if (producto) {
         // Convertir precio (string) a numérico y agregar 21% de IVA
         const priceKey = Object.keys(producto).find(
           (key) =>
             key.toLowerCase().includes('precioventa') ||
-            key.toLowerCase().includes('precio')
+            key.toLowerCase().includes('precioventa')
         )
         if (priceKey && typeof producto[priceKey] === 'string') {
           // Elimina símbolos no numéricos y reemplaza coma decimal
@@ -60,6 +61,10 @@ app.get('/producto/:codigo', (req, res) => {
           // Sobrescribimos el precio con IVA incluido
           producto[priceKey] = priceWithIVA
         }
+        console.log(`Buscando código: ${codigoBuscado}`)
+        console.log(
+          `Producto encontrado: ${producto.cdigobarras} (${producto[priceKey]})`
+        )
         return res.json(producto)
       }
       return res.status(404).json({ error: 'Producto no encontrado' })
