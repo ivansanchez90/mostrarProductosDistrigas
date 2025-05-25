@@ -37,6 +37,7 @@ function App() {
       setError('Producto no encontrado')
       console.error('Error en la búsqueda:', err.response?.data || err.message)
     }
+    setCodigo('')
   }
 
   const handleInput = (e) => {
@@ -46,6 +47,7 @@ function App() {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       buscarProducto()
+      setCodigo('')
     }
   }
 
@@ -53,11 +55,12 @@ function App() {
     <div className='App'>
       <div className='header'>
         <div className='logo-section'>
-          <div className='logo-icon'>GD</div>
-          <div className='header-text'>
+          {/* <div className='logo-icon'>GD</div> */}
+          {/* <div className='header-text'>
             <h1>Sistema de Consulta</h1>
             <div className='subtitle'>Grupo Distrigas</div>
-          </div>
+          </div> */}
+          <img src='/logo.png' alt='logo' />
         </div>
       </div>
 
