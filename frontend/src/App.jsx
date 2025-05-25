@@ -51,54 +51,108 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>Buscador de Productos</h1>
-      <div className='buscador'>
-        <div className='input-buscador'>
-          <input
-            type='text'
-            value={codigo}
-            onChange={handleInput}
-            onKeyDown={handleKeyDown}
-            placeholder='Escanea o ingresa el código de barras'
-            autoFocus
-          />
+      <div className='header'>
+        <div className='logo-section'>
+          <div className='logo-icon'>GD</div>
+          <div className='header-text'>
+            <h1>Sistema de Consulta</h1>
+            <div className='subtitle'>Grupo Distrigas</div>
+          </div>
+        </div>
+      </div>
 
-          <button onClick={buscarProducto}>Buscar</button>
+      <div className='content'>
+        <div className='search-section'>
+          <h2 className='search-title'>Consulta de Productos</h2>
+
+          <div className='input-container'>
+            <input
+              type='text'
+              value={codigo}
+              onChange={handleInput}
+              onKeyDown={handleKeyDown}
+              placeholder='Código de barras del producto'
+              autoFocus
+            />
+          </div>
+
+          <button className='search-button' onClick={buscarProducto}>
+            Buscar Producto
+          </button>
+
+          {error && <div className='error'>{error}</div>}
         </div>
 
-        {producto && (
-          <div className='resultado'>
-            <h2>Producto encontrado:</h2>
-            <p>
-              <strong className='underline'>Nombre:</strong> {producto.nombre}
-            </p>
-            <p>
-              <strong className='underline'>Precio Lista:</strong>{' '}
-              {formatCurrency(producto.precioventa * 1.15)}
-            </p>
-            <p className='metodos-pago resaltar'>
-              <img src='/visa.svg' alt='visa' />
-              <img src='/mastercard.svg' alt='mastercard' />
-              <div style={{ marginRight: '5px' }}>6 cuotas sin interés de:</div>
-              {formatCurrency((producto.precioventa * 1.15) / 6)}
-            </p>
-            <p className='metodos-pago'>
-              <img src='/visa.svg' alt='visa' />
-              <img src='/mastercard.svg' alt='mastercard' />
-              <img src='/tuya.jpg' alt='tuya' />
-              <strong>3 cuotas sin interés de:</strong>
-              {formatCurrency((producto.precioventa * 1.15) / 3)}
-            </p>
+        <div className='results-section'>
+          {!producto ? (
+            <div className='empty-state'>
+              <div className='search-icon'>🔍</div>
+              <div>Ingrese un código para ver los detalles del producto</div>
+            </div>
+          ) : (
+            <>
+              <div className='producto-header'>
+                <div className='producto-nombre'>{producto.nombre}</div>
+                <div className='producto-codigo'>Código: {codigo}</div>
+              </div>
 
-            <p className='metodos-pago'>
-              <img src='/efectivo.png' alt='efectivo' />
-              <strong>Efectivo, Transferencia 15% dcto:</strong>
-              {formatCurrency(producto.precioventa)}
-            </p>
-          </div>
-        )}
+              <div className='producto-content'>
+                <div className='precio-section'>
+                  <div className='precio-valor'>
+                    {formatCurrency(producto.precioventa * 1.15)}
+                  </div>
+                  <div className='precio-label'>Precio de Lista</div>
+                </div>
 
-        {error && <p className='error'>{error}</p>}
+                <div className='metodos-pago'>
+                  <div className='metodos-titulo'>Formas de Pago</div>
+
+                  <div className='metodo-item destacado'>
+                    <div className='metodo-left'>
+                      <div className='metodo-iconos'>
+                        <img src='/visa.svg' alt='Visa' />
+                        <img src='/mastercard.svg' alt='Mastercard' />
+                      </div>
+                      <div className='metodo-texto'>6 cuotas sin interés</div>
+                    </div>
+                    <div className='metodo-precio'>
+                      {formatCurrency((producto.precioventa * 1.15) / 6)}
+                    </div>
+                  </div>
+
+                  <div className='metodo-item'>
+                    <div className='metodo-left'>
+                      <div className='metodo-iconos'>
+                        <img src='/visa.svg' alt='Visa' />
+                        <img src='/mastercard.svg' alt='Mastercard' />
+                        <img src='/tuya.jpg' alt='Tuya' />
+                      </div>
+                      <div className='metodo-texto'>3 cuotas sin interés</div>
+                    </div>
+                    <div className='metodo-precio'>
+                      {formatCurrency((producto.precioventa * 1.15) / 3)}
+                    </div>
+                  </div>
+
+                  <div className='metodo-item'>
+                    <div className='metodo-left'>
+                      <div className='metodo-iconos'>
+                        <img src='/efectivo.png' alt='Efectivo' />
+                      </div>
+                      <div className='metodo-texto'>
+                        Efectivo / Transferencia
+                        <span className='metodo-descuento'>15% OFF</span>
+                      </div>
+                    </div>
+                    <div className='metodo-precio'>
+                      {formatCurrency(producto.precioventa)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   )
